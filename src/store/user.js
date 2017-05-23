@@ -46,7 +46,7 @@ const userModule = {
             const popup = window.open('http://github.com/login/oauth/authorize?client_id=065ea78ba3a29fe0be3d&state='+randState);
             ws.rpc('github', {randState}).then(result => {
                 popup.close();
-                this.$store.commit('loggedIn', result);
+                this.$store.commit('setUser', result);
             });
         }
     }
