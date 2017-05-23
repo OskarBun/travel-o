@@ -1,6 +1,7 @@
 <template>
 <div id="app">
-    <h1>Travelo</h1>
+    <img src="./assets/Travel-o.png"/>
+    <h1>Travel-o</h1>
     <foo></foo>
 </div>
 </template>
