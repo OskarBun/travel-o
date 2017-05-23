@@ -1,0 +1,78 @@
+body {
+    position: absolute;
+    top: 0; bottom: 0;
+    left: 0; right: 0;
+
+    background: #69AEBB;
+}
+
+/* Hide the main content until Vue has loaded */
+[v-cloak] {
+    display: none;
+}
+.loader {
+    display: none;
+}
+
+[v-cloak].loader {
+    position: absolute;
+    top: 0; bottom: 0;
+    left: 0; right: 0;
+
+    display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+
+	-ms-flex-align: center;
+	-webkit-align-items: center;
+	-webkit-box-align: center;
+
+	align-items: center;
+}
+
+.loader
+.loader-content {
+    position: relative;
+    width: 100%;
+    text-align: center;
+}
+
+.loader .loader-flag,
+.loader .loader-base {
+    display: block;
+    width: 100%;
+    height: 150px;
+}
+
+.loader
+.loader-title {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 50px;
+    color: #FFF;
+}
+
+.loader
+.loader-flag {
+    position: absolute;
+
+    -webkit-animation: drop 2s infinite ease-in-out;
+            animation: drop 2s infinite ease-in-out;
+}
+
+@keyframes drop {
+    0%   {
+        top: -40px;
+        -webkit-transform: rotateY(150deg);
+                transform: rotateY(150deg);
+    }
+    50%  {
+        top: 0px;
+        -webkit-transform: rotateY(1deg);
+                transform: rotateY(1deg);
+    }
+    100% {
+        top: -40px;
+        -webkit-transform: rotateY(150deg);
+                transform: rotateY(150deg);
+    }
+}
