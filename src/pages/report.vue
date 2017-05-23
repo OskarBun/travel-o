@@ -15,8 +15,12 @@
         </ul>
         <h2>Overview</h2>
         <p>
-            A Vue.js web application. Bundled by webpack. Served by Node.js server.
+            A Vue.js web application.
+            Bundled by webpack.
+            Served by Node.js server.
             API by an RPC websocket.
+            <br>
+            Hosted at: <a target="_blank" href="http://travel-o.herokuapp.com">http://travel-o.herokuapp.com</a>
         </p>
         <div class="main">
             <h3>HTML</h3>
@@ -44,7 +48,7 @@
             <p>
                 This project has allowed me to further my understanding and use of Vue.js while changing my development enviroment to webpack.
                 The whole project is built using these tools.
-                Vue.js is a standard client-side framework (Not for long --Link to SSR) with access to the usual client-side templating and flow control.
+                Vue.js is a standard client-side framework (<a target="_blank" href="https://ssr.vuejs.org/en/">Not for long</a>) with access to the usual client-side templating and flow control.
                 While Vue.js is a lovely frontend library, with an easy to understand DSL, webpack is the true star of this project.
                 Enabling features such as Babel and Hot-Reloading, webpack has made the development easier and more enjoyable.
                 During development the js files are built into a bundle and served from memory. This allows for the speed of bundled applications during development.
@@ -81,6 +85,9 @@
                         <b>newUser</b> Creates a guest account with a random (silly) name.
                     </li>
                 </ul>
+                To fully utilise the websocket's duplex communication, connections can subscribe to rpc events via a handwritten pub/sub library (broadcast.js).
+                This allows for live updates to all model objects.
+                The subscriptions are hierarchical, allowing for clients to subscribe to general topics, ie all users, or specific topics, ie a trip.
             </p>
             <h3>Dynamic pages</h3>
             <p>
@@ -90,9 +97,10 @@
             <p>
                 In addition to the required "A" targets, where achieved, I implemented:
                 <ul>
-                    <li>The webpack build scripts for full production use.</li>
+                    <li>The webpack build scripts for full production minification.</li>
                     <li>Heroku configuration for hosting, including using a CLEARDB mysql database.</li>
                     <li>Implemented OAuth2 login with github from scratch to learn the control flow.</li>
+                    <li>Hierarchical embedded pub/sub for event listening.</li>
                 </ul>
                 In conclusion this was an enjoyable project and a good exercise to learn the most up to date libraries and dev enviroments.
                 Up next, learn server side rendering with client hydration. <b>Universal Javascript!</b>
