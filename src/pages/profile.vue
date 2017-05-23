@@ -78,7 +78,7 @@ export default {
             this.$store.dispatch("newUser")
         },
         github_sign_in() {
-            if(!this.local) this.$store.dispatch("github")
+            this.$store.dispatch("github")
 
         },
         sign_out() {

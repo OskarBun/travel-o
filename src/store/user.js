@@ -44,9 +44,9 @@ const userModule = {
         github ({ state, commit }) {
             const randState = uuid.v4();
             const popup = window.open('http://github.com/login/oauth/authorize?client_id=065ea78ba3a29fe0be3d&state='+randState);
-            ws.rpc('github', {randState}).then(result => {
+            ws.rpc('github', {state: randState}).then(result => {
                 popup.close();
-                this.$store.commit('setUser', result);
+                commit('setUser', result);
             });
         }
     }
