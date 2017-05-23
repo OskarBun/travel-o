@@ -1,4 +1,12 @@
-const ws = new WebSocket("ws://localhost:8080")
+const loc = window.location, new_uri;
+if (loc.protocol === "https:") {
+    new_uri = "wss:";
+} else {
+    new_uri = "ws:";
+}
+new_uri += "//" + loc.host;
+
+const ws = new WebSocket(new_uri)
 
 const outs = {}
 let id = 1
