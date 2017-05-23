@@ -1,5 +1,5 @@
 <template>
-    <div class="ProfilePage" style="background-image:url(src/assets/world_outline.svg)">
+    <div class="ProfilePage">
         <div class="profile">
             <div class="bubble">
                 <user-bubble :style="border_style" :image="avatar_url"></user-bubble>
@@ -8,13 +8,7 @@
                 <div class="title">{{username}}</div>
                 <div class="colors">
                     <span>Pick your colour:</span>
-                    <select v-model="color">
-                        <option>#69AEBB</option>
-                        <option>#F9D068</option>
-                        <option>#F96868</option>
-                        <option>#76D358</option>
-                        <option>#000000</option>
-                    </select>
+                    <compact-picker class="picker" v-model="color"/>
                 </div>
                 <div class="guest" v-if="guest">
                     <div>You are signed in as a guest.</div>
@@ -32,8 +26,10 @@
 
 <script>
 // JS Imports
-// -- Vuex Helpers
+// –– Vuex Helpers
 import {mapState} from 'vuex'
+// –– Dependencies
+import { Compact } from 'vue-color'
 // –– Components
 import UserBubble from '../components/user-bubble.vue'
 
@@ -43,7 +39,8 @@ import UserBubble from '../components/user-bubble.vue'
 
 export default {
     components: {
-        'user-bubble': UserBubble
+        'user-bubble': UserBubble,
+        'compact-picker': Compact
     },
     props: [ 'id' ],
     data() {
@@ -95,21 +92,23 @@ export default {
 
     display: flex;
     align-items: center;
-
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
 }
 
 .ProfilePage
 .profile {
     min-width: 300px;
     margin: auto;
-    padding: 20px 5px;
+    padding: 20px 15px;
 
     background: #FFF;
     border: 2px solid #69AEBB;
     text-align: center;
+}
+
+.ProfilePage
+.picker {
+    margin: auto;
+    box-shadow: none;
 }
 
 .ProfilePage
@@ -119,12 +118,12 @@ export default {
     align-items: center;
     text-align: center;
 
-    width: 250px;
-    height: 250px;
+    width: 300px;
+    height: 300px;
     margin: auto;
 
     font-size: 200px;
-    line-height: 300px;
+    line-height: 320px;
 }
 
 .ProfilePage

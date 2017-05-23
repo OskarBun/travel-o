@@ -27,8 +27,8 @@ export default {
 <style>
 .UserBubble {
     display: block;
-    width: 90%;
-    height: 90%;
+    width: 80%;
+    height: 80%;
     margin: auto;
 
     border: 2px solid #FFF;

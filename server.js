@@ -67,7 +67,7 @@ app.ws.use(async ctx => {
 })
 
 //Run app
-const port = process.env.PORT || 8080
+const port = process.env.PORT || 8888
 
 app.listen(port, () => {
     console.log("Listening on "+port)

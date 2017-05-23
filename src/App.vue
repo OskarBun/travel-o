@@ -122,8 +122,12 @@ a {
     width: 100%;
     height: calc(100% - 50px);
 
-    background: #FFF;
     color: #69AEBB;
+    background-color: #FFF;
+    background-image:url('./assets/world_outline.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
 }
 
 

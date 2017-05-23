@@ -1,5 +1,5 @@
 <template>
-    <div class="MainPage" style="background-image:url(src/assets/world_outline.svg)">
+    <div class="MainPage">
         <div class="intro">
             <div class="flag flag-one">
                 <icon fill="#F9D068"></icon>
@@ -55,10 +55,6 @@ export default {
     position: relative;
     width: 100%;
     height: 100%;
-
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
 }
 
 .MainPage
