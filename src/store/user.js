@@ -4,7 +4,7 @@ import uuid from 'uuid';
 const userModule = {
     state: {
         username: null,
-        id: 0,
+        id: null,
         avatar_url: null,
         color: "#69AEBB",
         guest: true
@@ -15,7 +15,7 @@ const userModule = {
             state.id = user.id;
             state.avatar_url = user.avatar_url;
             state.color = user.color;
-            state.guest = user.github_token === null;
+            state.guest = user.github_id === null;
             //This needs to be server generated and SUPER secret
             document.cookie = "travelo.cookie="+user.id
         }
@@ -34,7 +34,7 @@ const userModule = {
         signOut ({ state, commit }) {
             ws.rpc('signOut').then(()=>{
                 state.username = null
-                state.id = 0
+                state.id = null
                 state.avatar_url = null
                 state.color = "#69AEBB"
                 state.guest = true
