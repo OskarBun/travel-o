@@ -1,155 +1,230 @@
 <template>
-    <div class="Report">
-        <img src="../assets/Travel-o.png"/>
-        <h1>Travel-o Report</h1>
-        <ul>
-            <li>A for HTML</li>
-            <li>A for CSS</li>
-            <li>A for JS</li>
-            <li>B for PNG</li>
-            <li>A for SVG</li>
-            <li>A for Server</li>
-            <li>A for Database</li>
-            <li>A for Dynamic pages</li>
-            <li>35 for Depth (out of 40)</li>
-        </ul>
-        <h2>Overview</h2>
-        <p>
-            A Vue.js web application.
-            Bundled by webpack.
-            Served by Node.js server.
-            API by an RPC websocket.
-            <br>
-            Hosted at: <a target="_blank" href="http://travel-o.herokuapp.com">http://travel-o.herokuapp.com</a>
-        </p>
-        <div class="main">
-            <h3>HTML</h3>
+    <div class="ReportPage">
+        <div class="report">
+            <h1 class="title">
+                <icon class="flag" fill="#000"></icon>
+                <span>Travelo Report</span>
+            </h1>
+            <ul>
+                <li>A for HTML</li>
+                <li>A for CSS</li>
+                <li>A for JS</li>
+                <li>B for PNG</li>
+                <li>A for SVG</li>
+                <li>A for Server</li>
+                <li>A for Database</li>
+                <li>A for Dynamic pages</li>
+                <li>35 for Depth (out of 40)</li>
+            </ul>
+            <h2>Overview</h2>
             <p>
-                The HTML displayed in the web-app are written in .vue files.
-                These specifiy HTML, CSS and JS for a Vue.js component.
-                The .vue file is loaded into the javascript to build the website by webpack.
-                The webpack vue-loader compiles the HTML into Virtual-DOM objects.
-                At this step the HTML is validated, ensuring correct and well formed documents.
+                A Vue.js web application.
+                Bundled by webpack.
+                Served by Node.js server.
+                API by an RPC websocket.
+                <br>
+                Hosted at: <a target="_blank" href="http://travel-o.herokuapp.com">http://travel-o.herokuapp.com</a>
             </p>
-            <h3>CSS</h3>
-            <p>
-                Similar to the HTML, the css is written in .vue files.
-                This allows the styles to be scoped to particular components, thus avoiding global namespace conflicts. Noteworthy features include:
-                <ul>
-                    <li>
-                        <b>Transitions via Vue.js:</b> These allow for components to be animated in and out via css3 transition.
-                    </li>
-                    <li>
-                        <b>Loader:</b> CSS animation using @keyframes.
-                    </li>
-                </ul>
-            </p>
-            <h3>JS</h3>
-            <p>
-                This project has allowed me to further my understanding and use of Vue.js while changing my development enviroment to webpack.
-                The whole project is built using these tools.
-                Vue.js is a standard client-side framework (<a target="_blank" href="https://ssr.vuejs.org/en/">Not for long</a>) with access to the usual client-side templating and flow control.
-                While Vue.js is a lovely frontend library, with an easy to understand DSL, webpack is the true star of this project.
-                Enabling features such as Babel and Hot-Reloading, webpack has made the development easier and more enjoyable.
-                During development the js files are built into a bundle and served from memory. This allows for the speed of bundled applications during development.
-                Hot-Reloading swaps in and out imported modules in the Client Javascript allowing for changes to the site without reloading.
-                When the site is ready for production, webpack builds the files into a single minified .js entry for the website in the 'dist' directory.
-            </p>
-            <h3>PNG</h3>
-            <p>
-                I found it hard to fit PNGs into the scope of this project as SVGs are better suited for the scaling sizes of web
-                and the logos created were not complex enough to warrant bitmap graphics.
-                However the "travel-o" bot above serves to show my experience with PNGs and Krita.
-                Importing a PNG of "A.W.E.S.O.M-O" from South Park, I edited the colors of the head and body to match the color pallet of the website.
-                Additionally I added a layer on top to write over the letters, using a paint brush effect for the white and a sharpie pen for the letters.
-            </p>
-            <h3>SVG</h3>
-            <p>
-                The flag logo is designed from scratch by tracing an PNG copy.
-                The SVGs are loaded into the app as HTML, this allows them to be effected by CSS rules and transformations.
-                The map on the landing page is also an SVG (from wikipedia) which I edited the fill to be transparent, line width and color.
-            </p>
-            <h3>Server</h3>
-            <p>
-                The server is run using the Nodejs engine v7.10.
-                The library used to handle requests is Koajs, written by the express team.
-                Koa allows for removing "callback hell" experienced when using express via async/await es2017 feature.
-                The web server also serves a JSON rpc (v2.0) over a websocket connection.
-                Each procedure can be accessed by the client as described in the JSON-rpc spec.
-                Noteworthy procedures:
-                <ul>
-                    <li>
-                        <b>github</b> This enables github OAuth2. <i>Not available on localhost</i>
-                    </li>
-                    <li>
-                        <b>newUser</b> Creates a guest account with a random (silly) name.
-                    </li>
-                </ul>
-                To fully utilise the websocket's duplex communication, connections can subscribe to rpc events via a handwritten pub/sub library (broadcast.js).
-                This allows for live updates to all model objects.
-                The subscriptions are hierarchical, allowing for clients to subscribe to general topics, ie all users, or specific topics, ie a trip.
-            </p>
-            <h3>Dynamic pages</h3>
-            <p>
-                Dynamic pages are enabled by Vue.js and the Websocket RPC. Both have been described in JS and Server heading.
-            </p>
-            <h3>Depth</h3>
-            <p>
-                In addition to the required "A" targets, where achieved, I implemented:
-                <ul>
-                    <li>The webpack build scripts for full production minification.</li>
-                    <li>Heroku configuration for hosting, including using a CLEARDB mysql database.</li>
-                    <li>Implemented OAuth2 login with github from scratch to learn the control flow.</li>
-                    <li>Hierarchical embedded pub/sub for event listening.</li>
-                </ul>
-                In conclusion this was an enjoyable project and a good exercise to learn the most up to date libraries and dev enviroments.
-                Up next, learn server side rendering with client hydration. <b>Universal Javascript!</b>
-            </p>
+            <div class="main">
+                <h3>HTML</h3>
+                <p>
+                    The HTML displayed in the web-app are written in .vue files.
+                    These specifiy HTML, CSS and JS for a Vue.js component.
+                    The .vue file is loaded into the javascript to build the website by webpack.
+                    The webpack vue-loader compiles the HTML into Virtual-DOM objects.
+                    At this step the HTML is validated, ensuring correct and well formed documents.
+                </p>
+                <h3>CSS</h3>
+                <p>
+                    Similar to the HTML, the css is written in .vue files.
+                    This allows the styles to be scoped to particular components, thus avoiding global namespace conflicts. Noteworthy features include:
+                    <ul>
+                        <li>
+                            <b>Transitions via Vue.js:</b> These allow for components to be animated in and out via css3 transition.
+                        </li>
+                        <li>
+                            <b>Loader:</b> CSS animation using @keyframes.
+                        </li>
+                    </ul>
+                </p>
+                <h3>JS</h3>
+                <p>
+                    This project has allowed me to further my understanding and use of Vue.js while changing my development enviroment to webpack.
+                    The whole project is built using these tools.
+                    Vue.js is a standard client-side framework (<a target="_blank" href="https://ssr.vuejs.org/en/">Not for long</a>) with access to the usual client-side templating and flow control.
+                    While Vue.js is a lovely frontend library, with an easy to understand DSL, webpack is the true star of this project.
+                    Enabling features such as Babel and Hot-Reloading, webpack has made the development easier and more enjoyable.
+                    During development the js files are built into a bundle and served from memory. This allows for the speed of bundled applications during development.
+                    Hot-Reloading swaps in and out imported modules in the Client Javascript allowing for changes to the site without reloading.
+                    When the site is ready for production, webpack builds the files into a single minified .js entry for the website in the 'dist' directory.
+                </p>
+                <h3>PNG</h3>
+                <div class="awesomeo">
+                    <p>
+                        I found it hard to fit PNGs into the scope of this project as SVGs are better suited for the scaling sizes of web
+                        and the logos created were not complex enough to warrant bitmap graphics.
+                        However the "travel-o" bot here serves to show my experience with PNGs and Krita.
+                        Importing a PNG of "A.W.E.S.O.M-O" from South Park, I edited the colors of the head and body to match the color pallet of the website.
+                        Additionally I added a layer on top to write over the letters, using a paint brush effect for the white and a sharpie pen for the letters.
+                    </p>
+                    <div><img src="../assets/Travel-o.png"/></div>
+                </div>
+                <h3>SVG</h3>
+                <p>
+                    The flag logo is designed from scratch by tracing an PNG copy.
+                    The SVGs are loaded into the app as HTML, this allows them to be effected by CSS rules and transformations.
+                    The map on the landing page is also an SVG (from wikipedia) which I edited the fill to be transparent, line width and color.
+                </p>
+                <h3>Server</h3>
+                <p>
+                    The server is run using the Nodejs engine v7.10.
+                    The library used to handle requests is Koajs, written by the express team.
+                    Koa allows for removing "callback hell" experienced when using express via async/await es2017 feature.
+                    The web server also serves a JSON rpc (v2.0) over a websocket connection.
+                    Each procedure can be accessed by the client as described in the JSON-rpc spec.
+                    Noteworthy procedures:
+                    <ul>
+                        <li>
+                            <b>github</b> This enables github OAuth2. <i>Not available on localhost</i>
+                        </li>
+                        <li>
+                            <b>newUser</b> Creates a guest account with a random (silly) name.
+                        </li>
+                    </ul>
+                    To fully utilise the websocket's duplex communication, connections can subscribe to rpc events via a handwritten pub/sub library (broadcast.js).
+                    This allows for live updates to all model objects.
+                    The subscriptions are hierarchical, allowing for clients to subscribe to general topics, ie all users, or specific topics, ie a trip.
+                </p>
+                <h3>Dynamic pages</h3>
+                <p>
+                    Dynamic pages are enabled by Vue.js and the Websocket RPC. Both have been described in JS and Server heading.
+                </p>
+                <h3>Depth</h3>
+                <p>
+                    In addition to the required "A" targets, where achieved, I implemented:
+                    <ul>
+                        <li>The webpack build scripts for full production minification.</li>
+                        <li>Heroku configuration for hosting, including using a CLEARDB mysql database.</li>
+                        <li>Implemented OAuth2 login with github from scratch to learn the control flow.</li>
+                        <li>Hierarchical embedded pub/sub for event listening.</li>
+                    </ul>
+                    In conclusion this was an enjoyable project and a good exercise to learn the most up to date libraries and dev enviroments.
+                    Up next, learn server side rendering with client hydration. <b>Universal Javascript!</b>
+                </p>
+            </div>
         </div>
     </div>
 </template>
 <script>
+// JS Imports
+// –– Components
+import Icon from '../components/icon.vue'
+
+
 export default {
+    components: {
+        'icon': Icon,
+    },
     data(){
         return {}
     }
 }
 </script>
 <style>
-.Report {
-    background-color: #fff;
-    padding: 0px 10px;
-    padding-top: 50px;
+.ReportPage {
+    display: flex;
+    align-items: center;
+
+    width: 100%;
+    height: 100%;
+}
+
+.ReportPage
+.report {
+    height: 95%;
     max-width: 900px;
-    margin: 0 auto;
+    margin: auto;
+    overflow-y: auto;
+
+    padding: 50px 10px;
+    border: 2px solid #69AEBB;
+    box-sizing: border-box;
+
     font-family: 'Avenir', Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
     color: #2c3e50;
-    border: 2px solid #69AEBB;
-    border-top: none;
-    overflow-y: auto;
-    height: 100%;
-    width: 100%;
-    box-sizing: border-box;
+    background: #FFF;
 }
 
+.ReportPage
+.report
+.title * {
+    vertical-align: middle;
+}
+
+.ReportPage
+.flag {
+    width: 50px;
+    height: 50px;
+}
+
+.ReportPage
 .main {
     text-align: left;
 }
 
-h1, h2 {
+.ReportPage h1,
+.ReportPage h2 {
     font-weight: normal;
 }
+
+.ReportPage
+h3 {
+    margin-bottom: 0;
+}
+
+.ReportPage
 ul {
     list-style-type: none;
     padding: 0;
 }
+
+.ReportPage
 li {
     margin: 0 10px;
 }
+
+.ReportPage
 a {
     color: #42b983;
+}
+
+.ReportPage
+.awesomeo {
+    display: flex;
+    width: 100%;
+    margin: 6px 0px;
+}
+
+.ReportPage
+.awesomeo p {
+    display: block;
+    margin: 0;
+    width: 80%;
+}
+
+.ReportPage
+.awesomeo div {
+    width: 20%;
+}
+
+.ReportPage
+.awesomeo img {
+    display: block;
+    width: 70%;
+    height: auto;
+    margin: auto;
 }
 </style>
