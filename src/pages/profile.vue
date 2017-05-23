@@ -49,15 +49,17 @@ export default {
     },
     computed: {
         border_style() {
-            var colour = this.color
+            var colour = this.color.hex
             return { borderColor:colour, borderWidth: '10px' }
         },
         color: {
             get(){
-                return this.$store.state.user.color
+                return {
+                    hex: this.$store.state.user.color
+                }
             },
             set(value){
-                this.$store.dispatch('updateUser', {color:value})
+                this.$store.dispatch('updateUser', {color:value.hex})
             }
         },
         ...mapState({
@@ -73,6 +75,11 @@ export default {
         },
         sign_out() {
             this.$store.dispatch("signOut")
+        }
+    },
+    watch: {
+        user_id(newId){
+            this.$router.push({name:'user', params: {id: newId}})
         }
     },
     mounted() {

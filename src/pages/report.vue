@@ -1,5 +1,7 @@
 <template>
     <div class="Report">
+        <img src="../assets/Travel-o.png"/>
+        <h1>Travel-o Report</h1>
         <ul>
             <li>A for HTML</li>
             <li>A for CSS</li>
@@ -14,7 +16,7 @@
         <h2>Overview</h2>
         <p>
             A Vue.js web application. Bundled by webpack. Served by Node.js server.
-            Data communication by an RPC websocket.
+            API by an RPC websocket.
         </p>
         <div class="main">
             <h3>HTML</h3>
@@ -28,8 +30,7 @@
             <h3>CSS</h3>
             <p>
                 Similar to the HTML, the css is written in .vue files.
-                This allows the styles to be scoped to particular components, thus avoiding global namespace conflicts.
-                <h4>Noteworthy Features</h4>
+                This allows the styles to be scoped to particular components, thus avoiding global namespace conflicts. Noteworthy features include:
                 <ul>
                     <li>
                         <b>Transitions via Vue.js:</b> These allow for components to be animated in and out via css3 transition.
@@ -67,8 +68,34 @@
             <h3>Server</h3>
             <p>
                 The server is run using the Nodejs engine v7.10.
-                The library used to handle request is Koajs, written by the express team.
-                The server statically serves the "dist" folder on all request. Any 404 requests are
+                The library used to handle requests is Koajs, written by the express team.
+                Koa allows for removing "callback hell" experienced when using express via async/await es2017 feature.
+                The web server also serves a JSON rpc (v2.0) over a websocket connection.
+                Each procedure can be accessed by the client as described in the JSON-rpc spec.
+                Noteworthy procedures:
+                <ul>
+                    <li>
+                        <b>github</b> This enables github OAuth2. <i>Not available on localhost</i>
+                    </li>
+                    <li>
+                        <b>newUser</b> Creates a guest account with a random (silly) name.
+                    </li>
+                </ul>
+            </p>
+            <h3>Dynamic pages</h3>
+            <p>
+                Dynamic pages are enabled by Vue.js and the Websocket RPC. Both have been described in JS and Server heading.
+            </p>
+            <h3>Depth</h3>
+            <p>
+                In addition to the required "A" targets, where achieved, I implemented:
+                <ul>
+                    <li>The webpack build scripts for full production use.</li>
+                    <li>Heroku configuration for hosting, including using a CLEARDB mysql database.</li>
+                    <li>Implemented OAuth2 login with github from scratch to learn the control flow.</li>
+                </ul>
+                In conclusion this was an enjoyable project and a good exercise to learn the most up to date libraries and dev enviroments.
+                Up next, learn server side rendering with client hydration. <b>Universal Javascript!</b>
             </p>
         </div>
     </div>
@@ -82,12 +109,39 @@ export default {
 </script>
 <style>
 .Report {
+    background-color: #fff;
     padding: 0px 10px;
+    padding-top: 50px;
     max-width: 900px;
     margin: 0 auto;
+    font-family: 'Avenir', Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    color: #2c3e50;
+    border: 2px solid #69AEBB;
+    border-top: none;
+    overflow-y: auto;
+    height: 100%;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .main {
     text-align: left;
+}
+
+h1, h2 {
+    font-weight: normal;
+}
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+li {
+    margin: 0 10px;
+}
+a {
+    color: #42b983;
 }
 </style>
