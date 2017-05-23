@@ -17,7 +17,8 @@
             </div>
             <div class="notice" v-else>
                 <div>You are not signed in.</div>
-                <div class="sign" @click="sign_in">Sign In</div>
+                <div class="sign" @click="sign_in">Sign in as Guest</div>
+                <div class="sign" :class="{'inactive':local}"  @click="github_sign_in">Sign in via Github</div>
             </div>
         </div>
     </div>
@@ -62,6 +63,9 @@ export default {
                 this.$store.dispatch('updateUser', {color:value.hex})
             }
         },
+        local() {
+            return location.hostname === "localhost" || location.hostname === "127.0.0.1"
+        },
         ...mapState({
             username: state => state.user.username,
             avatar_url: state => state.user.avatar_url,
@@ -72,6 +76,10 @@ export default {
     methods: {
         sign_in() {
             this.$store.dispatch("newUser")
+        },
+        github_sign_in() {
+            if(!this.local) this.$store.dispatch("github")
+
         },
         sign_out() {
             this.$store.dispatch("signOut")
@@ -148,11 +156,22 @@ export default {
 .ProfilePage
 .sign {
     color: #F96868;
-    width: 100px;
+    width: 200px;
     margin: auto;
     border: 2px solid #F96868;
     padding: 3px 5px;
     margin-top: 15px;
+}
+
+.ProfilePage
+.sign.inactive {
+    color: #D3D3D3;
+    border-color: #D3D3D3;
+}
+
+.ProfilePage
+.sign.inactive:hover {
+    cursor:not-allowed;
 }
 
 .ProfilePage

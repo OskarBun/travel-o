@@ -1,4 +1,5 @@
 import ws from '../ws.js';
+import uuid from 'uuid';
 
 const userModule = {
     state: {
@@ -39,6 +40,14 @@ const userModule = {
                 state.guest = true
                 document.cookie = "travelo.cookie" + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
             })
+        },
+        github ({ state, commit }) {
+            const randState = uuid.v4();
+            const popup = window.open('http://github.com/login/oauth/authorize?client_id=065ea78ba3a29fe0be3d&state='+randState);
+            ws.rpc('github', {randState}).then(result => {
+                popup.close();
+                this.$store.commit('loggedIn', result);
+            });
         }
     }
 }
