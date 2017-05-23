@@ -13,11 +13,11 @@
             <router-link class="menu-link" :to="{ name: 'user', params: { id: user_id }}">
                 <div class="profile">
                     <div class="profile-name">
-                        <span v-if="user">{{user.username}}</span>
-                        <span v-else>Login</span>
+                        <span v-if="username">{{username}}</span>
+                        <span v-else>Sign In</span>
                     </div>
                     <div class="profile-image">
-                        <user-bubble :image="profile_image"></user-bubble>
+                        <user-bubble :image="avatar_url"></user-bubble>
                     </div>
                 </div>
             </router-link>
@@ -28,6 +28,8 @@
 
 <script>
 // JS Imports
+// -- Vuex Helpers
+import {mapState} from 'vuex'
 // –– Components
 import Icon from '../components/icon.vue'
 import UserBubble from '../components/user-bubble.vue'
@@ -38,15 +40,13 @@ export default {
         'icon': Icon,
         'user-bubble': UserBubble
     },
-    props: [ 'user' ],
     computed: {
-        user_id() {
-            return this.user ? this.user.id : null
-        },
-        profile_image() {
-            var url = this.user ? this.user.profile_image : null
-            return url
-        }
+        ...mapState({
+            username: state => state.user.username,
+            color: state => state.user.color,
+            avatar_url: state => state.user.avatar_url,
+            user_id: state => state.user.id
+        })
     }
 }
 </script>

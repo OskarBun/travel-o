@@ -1,7 +1,7 @@
 <template>
     <div id="Main">
         <div class="header">
-            <menu-panel :user="user"></menu-panel>
+            <menu-panel></menu-panel>
         </div>
         <div class="content">
             <transition name="fade">
@@ -18,7 +18,7 @@
 import MenuPanel from './panels/menu.vue'
 
 // TEMPORARY DATA
-import user_json from './user.json'
+// import user_json from './user.json'
 
 // export vue definition
 export default {
@@ -28,12 +28,9 @@ export default {
     },
     data() {
         return {
-            user: null
         }
     },
     mounted() {
-        // load user data
-        this.user = user_json
     }
 }
 </script>

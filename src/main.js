@@ -3,6 +3,8 @@
 import Vue from 'vue'
 // –– Vue Router
 import VueRouter from 'vue-router'
+// -- Vuex Store
+import store from './store/store';
 
 // –– Root Vue Template
 import App from './app.vue'
@@ -12,10 +14,11 @@ import HomePage from './pages/home.vue'
 import MapPage from './pages/map.vue'
 import ProfilePage from './pages/profile.vue'
 
+Vue.config.productionTip = false;
+
 // Vue Configs
 // –– Vue Router
 Vue.use(VueRouter)
-
 
 // setup and start app
 function begin() {
@@ -46,6 +49,7 @@ function begin() {
     // begin render
     new Vue({
         el: '#Main',
+        store,
         router,
         render: h => h(App)
     })

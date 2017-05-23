@@ -2,13 +2,13 @@
     <div class="ProfilePage" style="background-image:url(src/assets/world_outline.svg)">
         <div class="profile">
             <div class="bubble">
-                <user-bubble :style="border_style" :image="user_image"></user-bubble>
+                <user-bubble :style="border_style" :image="avatar_url"></user-bubble>
             </div>
-            <div class="details" v-if="user">
-                <div class="title">{{user.username}}</div>
+            <div class="details" v-if="username">
+                <div class="title">{{username}}</div>
                 <div class="colors">
                     <span>Pick your colour:</span>
-                    <select v-model="user.color">
+                    <select v-model="color">
                         <option>#69AEBB</option>
                         <option>#F9D068</option>
                         <option>#F96868</option>
@@ -16,13 +16,14 @@
                         <option>#000000</option>
                     </select>
                 </div>
-                <div class="guest" v-if="user.guest">
+                <div class="guest" v-if="guest">
                     <div>You are signed in as a guest.</div>
                 </div>
+                <div class="sign" @click="sign_out">Sign Out</div>
             </div>
             <div class="notice" v-else>
                 <div>You are not signed in.</div>
-                <div class="sign-in" @click="sign_in">Sign In</div>
+                <div class="sign" @click="sign_in">Sign In</div>
             </div>
         </div>
     </div>
@@ -31,11 +32,13 @@
 
 <script>
 // JS Imports
+// -- Vuex Helpers
+import {mapState} from 'vuex'
 // –– Components
 import UserBubble from '../components/user-bubble.vue'
 
 // TEMPORARY DATA
-import user_json from '../user.json'
+// import user_json from '../user.json'
 
 
 export default {
@@ -45,27 +48,40 @@ export default {
     props: [ 'id' ],
     data() {
         return {
-            user: null
         }
     },
     computed: {
         border_style() {
-            var colour = this.user ? this.user.color : "#69AEBB"
+            var colour = this.color
             return { borderColor:colour, borderWidth: '10px' }
         },
-        user_image() {
-            return this.user ? this.user.profile_image : null
-        }
+        color: {
+            get(){
+                return this.$store.state.user.color
+            },
+            set(value){
+                this.$store.dispatch('updateUser', {color:value})
+            }
+        },
+        ...mapState({
+            username: state => state.user.username,
+            avatar_url: state => state.user.avatar_url,
+            user_id: state => state.user.id,
+            guest: state => state.user.guest
+        })
     },
     methods: {
         sign_in() {
-            // sign in here
+            this.$store.dispatch("newUser")
+        },
+        sign_out() {
+            this.$store.dispatch("signOut")
         }
     },
     mounted() {
         // load user if id prop is set
         if(this.id) {
-            this.user = user_json
+
         }
     }
 }
@@ -124,7 +140,7 @@ export default {
 }
 
 .ProfilePage
-.sign-in {
+.sign {
     color: #F96868;
     width: 100px;
     margin: auto;
@@ -134,7 +150,7 @@ export default {
 }
 
 .ProfilePage
-.sign-in:hover {
+.sign:hover {
     background: #FFEDED;
     cursor: pointer;
 }
