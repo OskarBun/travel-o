@@ -1,4 +1,5 @@
-const loc = window.location, new_uri;
+const loc = window.location;
+let new_uri = "";
 if (loc.protocol === "https:") {
     new_uri = "wss:";
 } else {
