@@ -26,7 +26,7 @@ export default {
         },
         oauth() {
             const state = uuid.v4();
-            // const popup = window.open('http://github.com/login/oauth/authorize?client_id=065ea78ba3a29fe0be3d&state='+state);
+            const popup = window.open('http://github.com/login/oauth/authorize?client_id=065ea78ba3a29fe0be3d&state='+state);
             this.$store.$rpc('github', {state}).then(result => {
                 popup.close();
                 this.$store.commit('loggedIn', result);
