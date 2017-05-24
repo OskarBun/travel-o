@@ -1,17 +1,15 @@
 <template>
     <div class="TripListPanel">
-        <div class="search-bar">
+        <div class="header">
             <input class="search-text" placeholder="Search or create a trip..." type="text" ref="search" v-model="search"/>
             <span class="lnr lnr-magnifier" @click="$refs.search.focus()"></span>
         </div>
-        <ul class="search-results" v-if="results">
+        <ul class="body">
             <li class="trip" v-for="trip in results" @click="open_trip(trip.id)">
                 <span class="name">{{trip.title}}</span>
             </li>
         </ul>
-        <div class="no-results" v-else>
-        </div>
-        <div class="add-bar">
+        <div class="footer">
             <div class="add" @click="new_trip" :disabled="!search">Plan a new trip.</div>
         </div>
     </div>
@@ -81,8 +79,8 @@ export default {
     height: 100%;
 }
 
-.TripListPanel .search-bar,
-.TripListPanel .add-bar {
+.TripListPanel .header,
+.TripListPanel .footer {
     display: flex;
     align-items: center;
     width: 90%;
@@ -93,8 +91,8 @@ export default {
     font-size: 20px;
 }
 
-.TripListPanel .search-bar .search-text,
-.TripListPanel .search-bar .lnr {
+.TripListPanel .header .search-text,
+.TripListPanel .header .lnr {
     display: block;
     height: 30px;
     border: none;
@@ -103,28 +101,28 @@ export default {
 }
 
 .TripListPanel
-.search-bar .search-text {
+.header .search-text {
     flex-grow: 1;
 }
 
-.TripListPanel .search-bar .search-text:focus,
-.TripListPanel .search-bar .search-text:focus + .lnr {
+.TripListPanel .header .search-text:focus,
+.TripListPanel .header .search-text:focus + .lnr {
     border-color: #F9D068;
 }
 
 .TripListPanel
-.search-bar .search-text:focus + .lnr {
+.header .search-text:focus + .lnr {
     color: #F9D068;
 }
 
 .TripListPanel
-.search-bar .lnr:before {
+.header .lnr:before {
     vertical-align: middle;
     cursor: pointer;
 }
 
 .TripListPanel
-.add-bar .add {
+.footer .add {
     text-align: center;
     width: 100%;
     border: 2px solid #69AEBB;
@@ -133,13 +131,13 @@ export default {
 }
 
 .TripListPanel
-.add-bar .add:hover {
+.footer .add:hover {
     background-color: #80CAD8;
     color: #FFF;
 }
 
-.TripListPanel .add-bar .add[disabled],
-.TripListPanel .add-bar .add:hover[disabled] {
+.TripListPanel .footer .add[disabled],
+.TripListPanel .footer .add:hover[disabled] {
     background-color: #FFF;
     border-color: #CCC;
     color: #CCC;
@@ -147,7 +145,7 @@ export default {
 }
 
 .TripListPanel
-.search-results {
+.body {
     width: 100%;
     margin: 0;
     height: calc(100% - 60px*2);
@@ -159,7 +157,7 @@ export default {
 
 
 .TripListPanel
-.search-results
+.body
 .trip {
     width: 100%;
     padding: 10px 15px;
@@ -171,13 +169,13 @@ export default {
 }
 
 .TripListPanel
-.search-results
+.body
 .trip:first-child {
     border-top: 1px solid #F1F1F1;
 }
 
 .TripListPanel
-.search-results
+.body
 .trip:hover {
     background-color: #E8F8FB;
 }

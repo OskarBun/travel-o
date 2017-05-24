@@ -1,9 +1,9 @@
 <template>
     <div id="Main">
-        <div class="header">
+        <div class="main-header">
             <menu-panel></menu-panel>
         </div>
-        <div class="content">
+        <div class="main-content">
             <transition name="fade">
                 <router-view></router-view>
             </transition>
@@ -119,7 +119,7 @@ a {
     height: 100%;
 }
 
-#Main .header  {
+#Main .main-header  {
     width: 100%;
     height: 50px;
 
@@ -127,7 +127,7 @@ a {
     color: #FFF;
 }
 
-#Main .content {
+#Main .main-content {
     width: 100%;
     height: calc(100% - 50px);
 

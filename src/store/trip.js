@@ -45,7 +45,13 @@ const TripModule = {
                 commit('set_trip', trip)
                 return trip
             })
-        }
+        },
+        get_trip({ state, commit }, params) {
+            return ws.rpc('getTrip', params).then((trip)=>{
+                commit('set_trip', trip)
+                return trip
+            })
+        },
     },
     modules: {
         search: SearchModule
