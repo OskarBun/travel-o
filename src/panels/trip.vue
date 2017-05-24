@@ -1,7 +1,8 @@
 <template>
     <div class="TripPanel">
         <div class="header">
-            <div class="title">{{title}}</div>
+            <input class="name" placeholder="Name your trip" type="text" ref="name" v-model="title"/>
+            <span class="lnr lnr-pencil" @click="$refs.name.focus()"></span>
         </div>
         <ul class="body">
             <li class="location" v-for="location in locations">
@@ -77,6 +78,36 @@ export default {
 
     line-height: 30px;
     font-size: 20px;
+}
+
+.TripPanel .header .name,
+.TripPanel .header .lnr {
+    display: block;
+    height: 30px;
+    border: none;
+    border-bottom: 1px solid #69AEBB;
+    box-sizing: border-box;
+}
+
+.TripPanel
+.header .name {
+    flex-grow: 1;
+}
+
+.TripPanel .header .name:focus,
+.TripPanel .header .name:focus + .lnr {
+    border-color: #F9D068;
+}
+
+.TripPanel
+.header .name:focus + .lnr {
+    color: #F9D068;
+}
+
+.TripPanel
+.header .lnr:before {
+    vertical-align: middle;
+    cursor: pointer;
 }
 
 .TripPanel
