@@ -65,7 +65,8 @@ export default {
 .menu-segment {
     display: inline-block;
     height: 100%;
-    min-width: 370px;
+    min-width: 350px;
+    box-sizing: border-box;
 }
 
 .MenuPanel
