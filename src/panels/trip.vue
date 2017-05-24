@@ -150,7 +150,7 @@ export default {
     text-align: center;
     width: 100%;
     border: 2px solid #69AEBB;
-    pbacking: 5px 10px;
+    padding: 5px 10px;
     cursor: pointer;
 }
 
