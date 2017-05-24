@@ -70,6 +70,11 @@ h1,h2,h3,h4,h5,.title {
     line-height: 50px;
 }
 
+input,
+textarea {
+    font-family: inherit;
+}
+
 input:focus,
 textarea:focus {
     outline: none;
@@ -82,15 +87,19 @@ a {
 
 ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
   color: #CCC;
+  font-family: inherit;
 }
 ::-moz-placeholder { /* Firefox 19+ */
   color: #CCC;
+  font-family: inherit;
 }
 :-ms-input-placeholder { /* IE 10+ */
   color: #CCC;
+  font-family: inherit;
 }
 :-moz-placeholder { /* Firefox 18- */
   color: #CCC;
+  font-family: inherit;
 }
 
 .break {

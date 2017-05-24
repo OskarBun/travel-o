@@ -16,6 +16,11 @@ import ProfilePage from './pages/profile.vue'
 import ReportPage from './pages/report.vue'
 import TestPage from './pages/test.vue'
 
+// –– Panels
+import TripListPanel from './panels/trip_list.vue'
+import TripPanel from './panels/trip.vue'
+
+
 Vue.config.productionTip = false;
 
 // Vue Configs
@@ -36,8 +41,21 @@ function begin() {
             {
                 path: '/map',
                 component: MapPage,
-                name: 'map',
-                props: false
+                props: false,
+                children: [
+                    {
+                        path: '',
+                        name: 'map',
+                        component: TripListPanel,
+                        props: false,
+                    },
+                    {
+                        path: 'trip/:id',
+                        name: 'trip',
+                        component: TripPanel,
+                        props: true,
+                    }
+                ]
             },
             {
                 path: '/user/:id?',

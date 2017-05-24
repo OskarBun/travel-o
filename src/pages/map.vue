@@ -5,7 +5,7 @@
                 <div class="arrow arrow-right">«</div>
             </div>
             <div class="panel-content">
-                hello
+                <router-view></router-view>
             </div>
         </div>
         <div class="panel centre-panel">

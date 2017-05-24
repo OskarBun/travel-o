@@ -14,6 +14,9 @@
                     <div>You are signed in as a guest.</div>
                 </div>
                 <div class="sign" @click="sign_out">Sign Out</div>
+                <div class="sign map-link">
+                    <router-link :to="{name:'map'}">Go to Map</router-link>
+                </div>
             </div>
             <div class="notice" v-else>
                 <div>You are not signed in.</div>
@@ -28,14 +31,11 @@
 <script>
 // JS Imports
 // –– Vuex Helpers
-import {mapState} from 'vuex'
+import { mapState } from 'vuex'
 // –– Dependencies
 import { Compact } from 'vue-color'
 // –– Components
 import UserBubble from '../components/user-bubble.vue'
-
-// TEMPORARY DATA
-// import user_json from '../user.json'
 
 
 export default {
@@ -44,23 +44,19 @@ export default {
         'compact-picker': Compact
     },
     props: [ 'id' ],
-    data() {
-        return {
-        }
-    },
     computed: {
         border_style() {
             var colour = this.color.hex
             return { borderColor:colour, borderWidth: '10px' }
         },
         color: {
-            get(){
+            get() {
                 return {
                     hex: this.$store.state.user.color
                 }
             },
-            set(value){
-                this.$store.dispatch('updateUser', {color:value.hex})
+            set(value) {
+                this.$store.dispatch('update_user', {color:value.hex})
             }
         },
         local() {
@@ -75,14 +71,14 @@ export default {
     },
     methods: {
         sign_in() {
-            this.$store.dispatch("newUser")
+            this.$store.dispatch("new_user")
         },
         github_sign_in() {
             if(true || !this.local) this.$store.dispatch("github")
 
         },
         sign_out() {
-            this.$store.dispatch("signOut")
+            this.$store.dispatch("sign_out")
         }
     },
     watch: {
@@ -90,23 +86,19 @@ export default {
             this.$router.push({name:'user', params: {id: newId}})
         }
     },
-    mounted() {
-        // load user if id prop is set
-        if(this.id) {
-
-        }
-    }
 }
 </script>
 
 
 <style>
 .ProfilePage {
+    position: relative;
     width: 100%;
     height: 100%;
 
     display: flex;
     align-items: center;
+    overflow: auto;
 }
 
 .ProfilePage
@@ -178,5 +170,21 @@ export default {
 .sign:hover {
     background: #FFEDED;
     cursor: pointer;
+}
+
+.ProfilePage
+.map-link {
+    color: #69AEBB;
+    width: 200px;
+    margin: auto;
+    border: 2px solid #69AEBB;
+    padding: 3px 5px;
+    margin-top: 15px;
+}
+
+.ProfilePage
+.map-link:hover {
+    background-color: #80CAD8;
+    color: #FFF;
 }
 </style>

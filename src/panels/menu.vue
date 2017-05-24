@@ -29,7 +29,7 @@
 <script>
 // JS Imports
 // -- Vuex Helpers
-import {mapState} from 'vuex'
+import { mapState } from 'vuex'
 // –– Components
 import Icon from '../components/icon.vue'
 import UserBubble from '../components/user-bubble.vue'
@@ -42,10 +42,10 @@ export default {
     },
     computed: {
         ...mapState({
+            user_id: state => state.user.id,
             username: state => state.user.username,
             color: state => state.user.color,
-            avatar_url: state => state.user.avatar_url,
-            user_id: state => state.user.id
+            avatar_url: state => state.user.avatar_url
         })
     }
 }

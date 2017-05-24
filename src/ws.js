@@ -51,7 +51,7 @@ export default {
             } else if(resp.id === 0) {
                 console.log(resp.message)
                 if(resp.user){
-                    store.commit("setUser", resp.user);
+                    store.commit("set_user", resp.user);
                 }
             } else if(outs[resp.id] === undefined) {
                 console.error("Could not find response id")

@@ -7,19 +7,17 @@
     </div>
 </template>
 <script>
-import {mapState} from 'vuex';
-
+// load vuex store
+import { mapState } from 'vuex'
+// component definition
 export default {
-    data(){
-        return {}
-    },
     computed: {
         search: {
             get(){
                 return this.$store.state.user.search.query;
             },
             set(query){
-                this.$store.dispatch('searchUser', {query})
+                this.$store.dispatch('search_user', {query})
             }
         },
         ...mapState({
