@@ -5,7 +5,7 @@
                 <div class="arrow arrow-right">«</div>
             </div>
             <div class="panel-content">
-                <router-view></router-view>
+                <router-view class="view"></router-view>
             </div>
         </div>
         <div class="panel centre-panel">
@@ -109,9 +109,16 @@ export default {
         position: absolute;
         top: 0; bottom: 0;
         left: 0; right: 0;
+        overflow: hidden;
         z-index: 2;
         background: #FFF;
         overflow: hidden;
+    }
+
+    .MapPage
+    .panel .panel-content
+    .view {
+        min-width: 350px;
     }
 
 </style>
