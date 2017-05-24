@@ -9,6 +9,7 @@
             </div>
         </div>
         <div class="panel centre-panel">
+            <map-panel></map-panel>
         </div>
         <div class="panel right-panel"  :class="{closed:!show_right}">
             <div class="close close-right" @click="toggle_right">
@@ -22,16 +23,41 @@
 </template>
 
 <script>
+import mapPanel from '../panels/map.vue';
+import event_bus from '../event.js';
+
+
+function smooth_resize(){
+    setTimeout(() => {
+        event_bus.$emit('resize map')
+    }, 100);
+    setTimeout(() => {
+        event_bus.$emit('resize map')
+    }, 280);
+    setTimeout(() => {
+        event_bus.$emit('resize map')
+    }, 500);
+}
+
 export default {
+    components: {
+        mapPanel
+    },
     data() {
         return {
             show_left: true,
-            show_right: true
+            show_right: false
         }
     },
     methods: {
-        toggle_left() { this.show_left = !this.show_left },
-        toggle_right() { this.show_right = !this.show_right },
+        toggle_left() {
+            this.show_left = !this.show_left
+            smooth_resize()
+        },
+        toggle_right() {
+            this.show_right = !this.show_right
+            smooth_resize()
+        },
     }
 }
 </script>
