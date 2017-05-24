@@ -6,6 +6,7 @@
         :zoom="10"
         class="gmap"
         ref="map"
+        :options="{styles}"
         >
         <gmap-marker
         v-for="(m,i) in markers"
@@ -24,6 +25,7 @@
 import * as VueGoogleMaps from 'vue2-google-maps';
 import Vue from 'vue';
 import event_bus from '../event.js'
+import styles from '../assets/google_maps_theme.json';
 
 Vue.use(VueGoogleMaps, {
     load: {
@@ -40,7 +42,8 @@ export default {
                 position: {lat: 10.0, lng: 10.0}
             }, {
                 position: {lat: 11.0, lng: 11.0}
-            }]
+            }],
+            styles
         }
     },
     methods: {
