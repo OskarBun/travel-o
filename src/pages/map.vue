@@ -16,14 +16,15 @@
                 <div class="arrow arrow-left">»</div>
             </div>
             <div class="panel-content">
-                hello
+                <destination-search-panel></destination-search-panel>
             </div>
         </div>
     </div>
 </template>
 
 <script>
-import mapPanel from '../panels/map.vue';
+import MapPanel from '../panels/map.vue';
+import DestinationSearchPanel from '../panels/destination_search.vue';
 import event_bus from '../event.js';
 
 
@@ -41,7 +42,8 @@ function smooth_resize(){
 
 export default {
     components: {
-        mapPanel
+        'map-panel': MapPanel,
+        'destination-search-panel': DestinationSearchPanel,
     },
     data() {
         return {

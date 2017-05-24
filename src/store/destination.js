@@ -2,6 +2,23 @@
 // –– Websocket
 import ws from '../ws.js'
 
+
+const SearchModule = {
+    state: {
+        query: null,
+        results: []
+    },
+    actions: {
+        search_trips ({ state, commit }, params) {
+            state.query = params.query
+
+            // ws.rpc('searchDestinations', params).then((results)=>{
+            //     state.results = results
+            // })
+        }
+    }
+}
+
 const DestinationModule = {
     state: {
         id: null,
@@ -16,6 +33,9 @@ const DestinationModule = {
             state.latlon = destination.latlon
             state.created_by = destination.created_by
         }
+    },
+    modules: {
+        search: SearchModule
     }
 }
 

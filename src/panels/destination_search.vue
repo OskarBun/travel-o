@@ -1,12 +1,12 @@
 <template>
-    <div class="LocationSearchPanel">
+    <div class="DestinationSearchPanel">
         <div class="header">
-            <input class="search-text" placeholder="Search for somewhere to visit..." type="text" ref="search" v-model="search"/>
+            <input class="search-text" placeholder="Search somewhere to visit..." type="text" ref="search" v-model="search"/>
             <span class="lnr lnr-magnifier" @click="$refs.search.focus()"></span>
         </div>
         <ul class="body">
-            <li class="location" v-for="location in results">
-                <span class="name">{{location.name}}</span>
+            <li class="destination" v-for="destination in results">
+                <span class="name">{{destination.name}}</span>
             </li>
         </ul>
     </div>
@@ -23,14 +23,14 @@ export default {
     computed: {
         search: {
             get() {
-                return this.$store.state.location.search.query
+                return this.$store.state.destination.search.query
             },
             set(query) {
-                this.$store.dispatch('search_location', {query})
+                this.$store.dispatch('search_destination', {query})
             }
         },
         ...mapState({
-            results: state => state.location.search.results,
+            results: state => state.destination.search.results,
             trip_id: state => state.trip.id,
             user_id: state => state.user.id
         })
@@ -40,14 +40,14 @@ export default {
 
 
 <style>
-.LocationSearchPanel {
+.DestinationSearchPanel {
     position: relative;
     width: 100%;
     height: 100%;
 }
 
-.LocationSearchPanel .header,
-.LocationSearchPanel .footer {
+.DestinationSearchPanel .header,
+.DestinationSearchPanel .footer {
     display: flex;
     align-items: center;
     width: 90%;
@@ -58,8 +58,8 @@ export default {
     font-size: 20px;
 }
 
-.LocationSearchPanel .header .search-text,
-.LocationSearchPanel .header .lnr {
+.DestinationSearchPanel .header .search-text,
+.DestinationSearchPanel .header .lnr {
     display: block;
     height: 30px;
     border: none;
@@ -67,28 +67,28 @@ export default {
     box-sizing: border-box;
 }
 
-.LocationSearchPanel
+.DestinationSearchPanel
 .header .search-text {
     flex-grow: 1;
 }
 
-.LocationSearchPanel .header .search-text:focus,
-.LocationSearchPanel .header .search-text:focus + .lnr {
+.DestinationSearchPanel .header .search-text:focus,
+.DestinationSearchPanel .header .search-text:focus + .lnr {
     border-color: #F9D068;
 }
 
-.LocationSearchPanel
+.DestinationSearchPanel
 .header .search-text:focus + .lnr {
     color: #F9D068;
 }
 
-.LocationSearchPanel
+.DestinationSearchPanel
 .header .lnr:before {
     vertical-align: middle;
     cursor: pointer;
 }
 
-.LocationSearchPanel
+.DestinationSearchPanel
 .body {
     width: 100%;
     margin: 0;
@@ -100,9 +100,9 @@ export default {
 }
 
 
-.LocationSearchPanel
+.DestinationSearchPanel
 .body
-.location {
+.destination {
     width: 100%;
     padding: 10px 15px;
     box-sizing: border-box;
@@ -112,15 +112,15 @@ export default {
     background: #FFF;
 }
 
-.LocationSearchPanel
+.DestinationSearchPanel
 .body
-.location:first-child {
+.destination:first-child {
     border-top: 1px solid #F1F1F1;
 }
 
-.LocationSearchPanel
+.DestinationSearchPanel
 .body
-.location:hover {
+.destination:hover {
     background-color: #E8F8FB;
 }
 
