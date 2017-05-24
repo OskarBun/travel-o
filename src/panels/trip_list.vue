@@ -4,12 +4,13 @@
             <input class="search-text" placeholder="Search or create a trip..." type="text" ref="search" v-model="search"/>
             <span class="lnr lnr-magnifier" @click="$refs.search.focus()"></span>
         </div>
-        <ul class="search-results">
-            <li class="search-item" v-for="trip in results">
-                <span class="lnr lnr-pushpin"></span>
+        <ul class="search-results" v-if="results">
+            <li class="trip" v-for="trip in results" @click="open_trip(trip.id)">
                 <span class="name">{{trip.title}}</span>
             </li>
         </ul>
+        <div class="no-results" v-else>
+        </div>
         <div class="add-bar">
             <div class="add" @click="new_trip" :disabled="!search">Plan a new trip.</div>
         </div>
@@ -45,13 +46,17 @@ export default {
                 // create a new trip
                 this.$store.dispatch("new_trip", {title:this.search})
             }
+        },
+        open_trip(id) {
+            // navigate to trip panel
+            this.$router.push({ name: 'trip', params: { id } })
         }
     },
     watch: {
         trip_id(new_value) {
             if(new_value) {
                 // navigate to trip panel
-                this.$router.push({ name: 'trip', params: { id: new_value }})
+                this.$router.push({ name: 'trip', params: { id: new_value } })
             }
         }
     },
@@ -146,7 +151,35 @@ export default {
     width: 100%;
     margin: 0;
     height: calc(100% - 60px*2);
+    padding: 10px 0px;
+    box-sizing: border-box;
+    overflow: auto;
+    list-style: none;
 }
 
+
+.TripListPanel
+.search-results
+.trip {
+    width: 100%;
+    padding: 10px 15px;
+    box-sizing: border-box;
+
+    color: #000;
+    border-bottom: 1px solid #F1F1F1;
+    background: #FFF;
+}
+
+.TripListPanel
+.search-results
+.trip:first-child {
+    border-top: 1px solid #F1F1F1;
+}
+
+.TripListPanel
+.search-results
+.trip:hover {
+    background-color: #E8F8FB;
+}
 
 </style>
