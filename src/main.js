@@ -14,6 +14,7 @@ import HomePage from './pages/home.vue'
 import MapPage from './pages/map.vue'
 import ProfilePage from './pages/profile.vue'
 import ReportPage from './pages/report.vue'
+import TestPage from './pages/test.vue'
 
 Vue.config.productionTip = false;
 
@@ -48,6 +49,12 @@ function begin() {
                 path: '/report',
                 component: ReportPage,
                 name: 'report',
+                props: false
+            },
+            {
+                path: '/test',
+                component: TestPage,
+                name: 'test',
                 props: false
             }
         ]

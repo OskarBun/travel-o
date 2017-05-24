@@ -1,6 +1,22 @@
 import ws from '../ws.js';
 import uuid from 'uuid';
 
+const searchModule = {
+    state: {
+        query: null,
+        results: []
+    },
+    actions: {
+        searchUser ({ state, commit }, params){
+            state.query = params.query;
+            ws.rpc('searchUser', params).then((users)=>{
+                console.log(users);
+                state.results = users
+            })
+        }
+    }
+}
+
 const userModule = {
     state: {
         username: null,
@@ -49,6 +65,9 @@ const userModule = {
                 commit('setUser', result);
             });
         }
+    },
+    modules: {
+        search: searchModule
     }
 }
 
