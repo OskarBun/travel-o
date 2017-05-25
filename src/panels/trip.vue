@@ -5,9 +5,9 @@
             <span class="lnr lnr-pencil" @click="$refs.name.focus()"></span>
         </div>
         <ul class="body">
-            <li class="location" v-for="location in locations">
-                <span class="icon"><icon fill="#000"></icon></span>
-                <span class="name">{{location.latlon}}</span>
+            <li class="location" v-for="location in destinations">
+                <span class="icon"><icon :fill="location.user.color"></icon></span>
+                <span class="name">{{location.name}}</span>
             </li>
         </ul>
         <div class="footer map-link">
@@ -35,18 +35,19 @@ export default {
             get() {
                 return this.$store.state.trip.title
             },
-            set(name) {
+            set(title) {
                 this.$store.dispatch('update_trip', {title})
             }
         },
         ...mapState({
-            locations: state => state.trip.locations
+            destinations: state => state.trip.destinations
         })
     },
     methods: {
         back() {
             // navigate to maps
             this.$router.push({name:'map'})
+            this.$store.commit('reset_trip')
         }
     },
     mounted() {

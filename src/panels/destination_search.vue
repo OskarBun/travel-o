@@ -1,12 +1,12 @@
 <template>
     <div class="DestinationSearchPanel">
         <div class="header">
-            <input class="search-text" placeholder="Search somewhere to visit..." type="text" ref="search" v-model="search"/>
+            <input class="search-text" placeholder="Search somewhere to visit..." type="text" ref="search" v-model.lazy="search"/>
             <span class="lnr lnr-magnifier" @click="$refs.search.focus()"></span>
         </div>
         <ul class="body">
-            <li class="destination" v-for="destination in results">
-                <span class="name">{{destination.name}}</span>
+            <li class="destination" v-for="destination in results" @click="viewDestination(destination)">
+                <span class="name">{{destination.formatted_address}}</span><span class="add" @click="addToTrip(destination)">Add</span>
             </li>
         </ul>
     </div>
@@ -17,6 +17,7 @@
 // JS Imports
 // -- Vuex Helpers
 import { mapState } from 'vuex'
+import event_bus from '../event'
 
 
 export default {
@@ -30,11 +31,35 @@ export default {
             }
         },
         ...mapState({
-            results: state => state.destination.search.results,
-            trip_id: state => state.trip.id,
-            user_id: state => state.user.id
+            results: state => state.destination.search.results
         })
     },
+    methods: {
+        viewDestination(d){
+            if(d.location_bounds)
+            event_bus.$emit('map/rebounds', {bounds: {
+                east: d.location_bounds.northeast.lng,
+                north: d.location_bounds.northeast.lat,
+                south: d.location_bounds.southwest.lat,
+                west: d.location_bounds.southwest.lng
+            }})
+        },
+        addToTrip(d){
+            this.$store.dispatch('add_destination', {
+                lng: d.location.lng,
+                lat: d.location.lat,
+                name: d.formatted_address
+            })
+        }
+    },
+    watch: {
+        results(newList){
+            const top = newList[0];
+            if(top){
+                this.viewDestination(top)
+            }
+        }
+    }
 }
 </script>
 
@@ -122,6 +147,11 @@ export default {
 .body
 .destination:hover {
     background-color: #E8F8FB;
+}
+
+.DestinationSearchPanel
+.add {
+    float: right;
 }
 
 </style>

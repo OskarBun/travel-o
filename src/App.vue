@@ -33,6 +33,10 @@ export default {
     mounted() {
     }
 }
+
+if(module.hot){
+    module.hot.accept()
+}
 </script>
 
 

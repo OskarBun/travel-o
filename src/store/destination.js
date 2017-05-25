@@ -1,6 +1,14 @@
 // JS Imports
 // –– Websocket
 import ws from '../ws.js'
+import geocoder from 'google-geocoder'
+
+
+
+var geo = geocoder({
+    key: 'AIzaSyB8W81LbL8wRLGnehNXqG3BjtdvDcnPxn0'
+});
+
 
 
 const SearchModule = {
@@ -9,12 +17,12 @@ const SearchModule = {
         results: []
     },
     actions: {
-        search_trips ({ state, commit }, params) {
+        search_destination ({ state, commit }, params) {
             state.query = params.query
 
-            // ws.rpc('searchDestinations', params).then((results)=>{
-            //     state.results = results
-            // })
+            geo.find(params.query, (err, data)=>{
+                state.results = data
+            })
         }
     }
 }

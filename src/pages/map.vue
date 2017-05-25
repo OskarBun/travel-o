@@ -30,13 +30,7 @@ import event_bus from '../event.js';
 
 function smooth_resize(){
     setTimeout(() => {
-        event_bus.$emit('resize map')
-    }, 100);
-    setTimeout(() => {
-        event_bus.$emit('resize map')
-    }, 280);
-    setTimeout(() => {
-        event_bus.$emit('resize map')
+        event_bus.$emit('map/resize')
     }, 500);
 }
 
@@ -48,7 +42,7 @@ export default {
     data() {
         return {
             show_left: true,
-            show_right: false
+            show_right: true
         }
     },
     methods: {
