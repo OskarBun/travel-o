@@ -1,8 +1,8 @@
 <template>
-    <div class="TestPage">
-        <input v-model.lazy="search">
+    <div class="UserSearchPanel">
+        <input v-model="search">
         <ul>
-            <li v-for="user in results">{{user.username}}</li>
+            <li v-for="user in results" @click="add_to_trip(user)">{{user.username}}</li>
         </ul>
     </div>
 </template>
@@ -23,6 +23,12 @@ export default {
         ...mapState({
             results: state => state.user.search.results
         })
+    },
+    methods: {
+        add_to_trip(user){
+            if(this.$store.state.user.id != user.id)
+                this.$store.dispatch('add_user', {user_id: user.id})
+        }
     }
 }
 </script>

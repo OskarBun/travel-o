@@ -7,7 +7,11 @@
             </router-link>
         </div>
         <div class="menu-segment menu-centre">
-            <!-- contextual items will go here -->
+            <div class="trip-users">
+                <div class="profile-image" v-for="user in trip_users" :key="user.id">
+                    <user-bubble :image="user.avatar_url"></user-bubble>
+                </div>
+            </div>
         </div>
         <div class="menu-segment menu-right">
             <router-link class="menu-link" :to="{ name: 'user', params: { id: user_id }}">
@@ -45,7 +49,8 @@ export default {
             user_id: state => state.user.id,
             username: state => state.user.username,
             color: state => state.user.color,
-            avatar_url: state => state.user.avatar_url
+            avatar_url: state => state.user.avatar_url,
+            trip_users: state => state.trip.users
         })
     }
 }
@@ -126,5 +131,9 @@ export default {
 
     width: 50px;
     height: 100%;
+}
+.MenuPanel
+.menu-center {
+    display: inline-block;
 }
 </style>

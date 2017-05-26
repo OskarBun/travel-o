@@ -52,14 +52,15 @@ export default {
                       id    = topics[1],
                       sub_topic = topics[2],
                       sub_id    = topics[3];
-                if(store.state[topic] && !sub_topic){
+                console.log(topics);
+                if(store.state[topic] && sub_topic===undefined){
                     if(store.state[topic].id === parseInt(id)){
                         store.commit("set_"+topic, resp.result);
                     } else {
                         console.log("Could be trip search result or users");
                     }
                 } else {
-                    store.commit("push_destination", resp.result);
+                    store.commit("push_"+sub_topic, resp.result);
                 }
                 if(topic === "user"){
                     store.commit("set_trip_user", resp.result)

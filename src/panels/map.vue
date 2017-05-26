@@ -112,7 +112,7 @@ export default {
         }.bind(this))
     },
     destroyed() {
-        console.log("foo");
+        this.$store.commit("reset_trip");
     }
 }
 </script>

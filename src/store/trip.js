@@ -3,6 +3,7 @@
 import ws from '../ws.js'
 
 function mapUsers(trip){
+    if(!trip.destinations) return []
     return trip.destinations.map((d)=>{
         d.user = trip.people.find(u=>d.created_by===u.id)
         return d
@@ -14,12 +15,17 @@ const SearchModule = {
         query: null,
         results: []
     },
+    mutations: {
+        set_results(state, trips){
+            state.results = trips
+        }
+    },
     actions: {
         search_trips ({ state, commit }, params) {
             state.query = params.query
 
             ws.rpc('searchTrips', params).then((trips)=>{
-                state.results = trips
+                commit("set_results", trips)
             })
         }
     }
@@ -42,10 +48,11 @@ const TripModule = {
             state.destinations = mapUsers(trip)
         },
         reset_trip(state) {
-            state.id = null,
-            state.title = null,
-            state.access = null,
+            state.id = null
+            state.title = null
+            state.access = null
             state.destinations = []
+            state.users = []
         },
         set_trip_user(state, user) {
             const i = state.users.findIndex(u=>u.id===user.id);
@@ -65,11 +72,20 @@ const TripModule = {
             } else {
                 state.destinations.push(destination)
             }
+        },
+        push_user(state, user){
+            const i = state.users.findIndex((u=>u.id===user.id))
+            if(i != -1){
+                state.users[i] = user
+            } else {
+                state.users.push(user)
+            }
         }
     },
     actions: {
-        new_trip({ state, commit }, params) {
+        new_trip({ state, commit, rootState }, params) {
             return ws.rpc('newTrip', params).then((trip)=>{
+                trip.destinations = [];
                 commit('set_trip', trip)
                 return trip
             })
@@ -87,12 +103,20 @@ const TripModule = {
                 return trip
             })
         },
-        add_destination({ state, commit, rootState }, params) {
+        add_destination({ state, commit }, params) {
             if(!state.id) return;
             params.trip_id = state.id;
             return ws.rpc('addDestination', params).then((destination)=>{
                 commit('push_destination', destination)
                 return destination
+            })
+        },
+        add_user({ state, commit }, params){
+            if(!state.id) return;
+            params.trip_id = state.id;
+            return ws.rpc('addUser', params).then((user)=>{
+                commit('push_user', user)
+                return user;
             })
         }
     },

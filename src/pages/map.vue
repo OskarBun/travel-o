@@ -17,6 +17,7 @@
             </div>
             <div class="panel-content">
                 <destination-search-panel></destination-search-panel>
+                <!-- <user-search-panel></user-search-panel> -->
             </div>
         </div>
     </div>
@@ -25,6 +26,7 @@
 <script>
 import MapPanel from '../panels/map.vue';
 import DestinationSearchPanel from '../panels/destination_search.vue';
+import UserSearchPanel from '../panels/user_search.vue';
 import event_bus from '../event.js';
 
 
@@ -38,6 +40,7 @@ export default {
     components: {
         'map-panel': MapPanel,
         'destination-search-panel': DestinationSearchPanel,
+        'user-search-panel': UserSearchPanel,
     },
     data() {
         return {
