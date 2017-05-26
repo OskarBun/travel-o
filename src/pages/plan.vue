@@ -16,7 +16,8 @@
                 <div class="arrow arrow-left">»</div>
             </div>
             <div class="panel-content">
-                <destination-search-panel></destination-search-panel>
+                <component :is="action"></component>
+                <!-- <destination-search-panel></destination-search-panel> -->
                 <!-- <user-search-panel></user-search-panel> -->
             </div>
         </div>
@@ -54,7 +55,8 @@ export default {
     data() {
         return {
             show_left: true,
-            show_right: true
+            show_right: true,
+            action: 'destination-search-panel'
         }
     },
     computed: {
@@ -71,12 +73,22 @@ export default {
             this.show_right = !this.show_right
             smooth_resize()
         },
+        adding_user() {
+            this.action = 'user-search-panel'
+        },
+        adding_destination() {
+            this.action = 'destination-search-panel'
+        }
     },
     created() {
         // redirect to sign in page
         if(!this.user_id) {
             this.$router.push({name:'map'})
         }
+    },
+    mounted() {
+        event_bus.$on('show_add_user', this.adding_user)
+        event_bus.$on('show_add_destination', this.adding_destination)
     }
 }
 </script>

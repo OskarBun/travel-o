@@ -1,5 +1,5 @@
 <template>
-<div class="UserBubble">
+<div class="UserBubble" :style="border_style">
     <div class="profile-img" :style="image_back" v-if="image"></div>
     <div class="profile-img" v-else>
         <span class="lnr lnr-user"></span>
@@ -14,11 +14,18 @@ export default {
         image: {
             type: String,
             default: null
+        },
+        color: {
+            type: String,
+            default: "#FFF"
         }
     },
     computed: {
         image_back() {
             return { backgroundImage: "url("+this.image+")" }
+        },
+        border_style() {
+            return { borderColor: this.color }
         }
     }
 }
