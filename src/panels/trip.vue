@@ -6,8 +6,8 @@
         </div>
         <ul class="body">
             <li class="location" v-for="location in destinations">
-                <span class="icon"><icon :fill="location.user.color"></icon></span>
-                <span class="name">{{location.name}}</span>
+                <div class="icon"><icon :fill="location.user.color"></icon></div>
+                <div class="name">{{location.name}}</div>
             </li>
         </ul>
         <div class="footer map-link">
@@ -125,6 +125,7 @@ export default {
 .TripPanel
 .body
 .location {
+    display: flex;
     width: 100%;
     padding: 10px 15px;
     box-sizing: border-box;
@@ -132,6 +133,9 @@ export default {
     color: #000;
     border-bottom: 1px solid #F1F1F1;
     background: #FFF;
+
+    line-height: 25px;
+    vertical-align: middle;
 }
 
 .TripPanel
@@ -144,6 +148,19 @@ export default {
 .body
 .location:hover {
     background-color: #E8F8FB;
+}
+
+.TripPanel
+.body .location
+.name {
+    flex-grow: 1;
+}
+
+.TripPanel
+.body .location
+.icon {
+    width: 40px;
+    height: 25px;
 }
 
 .TripPanel

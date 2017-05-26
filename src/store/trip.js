@@ -48,7 +48,7 @@ const TripModule = {
             })
         },
         update_trip ({ state, commit }, params) {
-            params.trip_id = state.trip.trip_id
+            params.trip_id = state.id
             return ws.rpc('updateTrip', params).then((trip)=>{
                 commit('set_trip', trip)
                 return trip

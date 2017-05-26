@@ -5,8 +5,11 @@
             <span class="lnr lnr-magnifier" @click="$refs.search.focus()"></span>
         </div>
         <ul class="body">
-            <li class="destination" v-for="destination in results" @click="viewDestination(destination)">
-                <span class="name">{{destination.formatted_address}}</span><span class="add" @click="addToTrip(destination)">Add</span>
+            <li class="destination" v-for="destination in results" @click="view_destination(destination)">
+                <div class="name">{{destination.formatted_address}}</div>
+                <div class="add" @click="add_to_trip(destination)">
+                    <span class="lnr lnr-plus-circle"></span>
+                </div>
             </li>
         </ul>
     </div>
@@ -35,7 +38,7 @@ export default {
         })
     },
     methods: {
-        viewDestination(d){
+        view_destination(d){
             if(d.location_bounds)
             event_bus.$emit('map/rebounds', {bounds: {
                 east: d.location_bounds.northeast.lng,
@@ -44,7 +47,7 @@ export default {
                 west: d.location_bounds.southwest.lng
             }})
         },
-        addToTrip(d){
+        add_to_trip(d){
             this.$store.dispatch('add_destination', {
                 lng: d.location.lng,
                 lat: d.location.lat,
@@ -56,7 +59,7 @@ export default {
         results(newList){
             const top = newList[0];
             if(top){
-                this.viewDestination(top)
+                this.view_destination(top)
             }
         }
     }
@@ -128,6 +131,7 @@ export default {
 .DestinationSearchPanel
 .body
 .destination {
+    display: flex;
     width: 100%;
     padding: 10px 15px;
     box-sizing: border-box;
@@ -135,6 +139,9 @@ export default {
     color: #000;
     border-bottom: 1px solid #F1F1F1;
     background: #FFF;
+
+    line-height: 20px;
+    vertical-align: middle;
 }
 
 .DestinationSearchPanel
@@ -150,8 +157,26 @@ export default {
 }
 
 .DestinationSearchPanel
+.body .destination
+.name {
+    flex-grow: 1;
+}
+
+.DestinationSearchPanel
+.body .destination
 .add {
-    float: right;
+    display: block;
+    width: 50px;
+    font-size: 18px;
+    text-align: center;
+}
+
+.DestinationSearchPanel
+.body .destination
+.add:hover {
+    color: #F9D068;
+    font-weight: bold;
+    cursor: pointer;
 }
 
 </style>
