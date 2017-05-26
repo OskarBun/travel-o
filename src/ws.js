@@ -59,7 +59,11 @@ export default {
                         console.log("Could be trip search result or users");
                     }
                 } else {
-                    store.commit("push_"+sub_topic, resp.result);
+                    if(!sub_id){
+                        store.commit("set_"+sub_topic, resp.result)
+                    } else {
+                        store.commit("push_"+sub_topic, resp.result);
+                    }
                 }
                 if(topic === "user"){
                     store.commit("set_trip_user", resp.result)

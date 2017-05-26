@@ -2,10 +2,10 @@
 // –– Websocket
 import ws from '../ws.js'
 
-function mapUsers(trip){
-    if(!trip.destinations) return []
-    return trip.destinations.map((d)=>{
-        d.user = trip.people.find(u=>d.created_by===u.id)
+function mapUsers(destinations, people){
+    if(!destinations) return []
+    return destinations.map((d)=>{
+        d.user = people.find(u=>d.created_by===u.id)
         return d
     })
 }
@@ -45,7 +45,7 @@ const TripModule = {
             state.title = trip.title
             state.access = trip.access
             state.users = trip.people
-            state.destinations = mapUsers(trip)
+            state.destinations = mapUsers(trip.destinations, trip.people)
         },
         reset_trip(state) {
             state.id = null
@@ -80,6 +80,9 @@ const TripModule = {
             } else {
                 state.users.push(user)
             }
+        },
+        set_destinations(state, destinations){
+            state.destinations = mapUsers(destinations, state.users)
         }
     },
     actions: {
@@ -106,6 +109,7 @@ const TripModule = {
         add_destination({ state, commit }, params) {
             if(!state.id) return;
             params.trip_id = state.id;
+            params.order = state.destinations.length + 1
             return ws.rpc('addDestination', params).then((destination)=>{
                 commit('push_destination', destination)
                 return destination
@@ -117,6 +121,14 @@ const TripModule = {
             return ws.rpc('addUser', params).then((user)=>{
                 commit('push_user', user)
                 return user;
+            })
+        },
+        order_destinations({ state, commit }, params){
+            if(!state.id) return;
+            params.trip_id = state.id;
+            commit('set_destinations', params.destinations)
+            return ws.rpc('orderDestinations', params).then((destinations)=>{
+                commit('set_destinations', destinations)
             })
         }
     },

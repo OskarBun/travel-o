@@ -5,10 +5,12 @@
             <span class="lnr lnr-pencil" @click="$refs.name.focus()"></span>
         </div>
         <ul class="body">
-            <li class="location" v-for="location in destinations">
-                <div class="icon"><icon :fill="location.user.color"></icon></div>
-                <div class="name">{{location.name}}</div>
-            </li>
+            <draggable v-model="destinations">
+                <li class="location" v-for="location in destinations">
+                    <div class="icon"><icon :fill="location.user.color"></icon></div>
+                    <div class="name">{{location.name}}</div>
+                </li>
+            </draggable>
         </ul>
         <div class="footer map-link">
             <div class="back" @click="back">Back</div>
@@ -23,12 +25,13 @@
 import { mapState } from 'vuex'
 // –– Components
 import Icon from '../components/icon.vue'
+import draggable from 'vuedraggable'
 
 import ws from '../ws.js'
 
-
 export default {
     components: {
+        draggable,
         'icon': Icon,
     },
     props: [ 'id' ],
@@ -41,9 +44,14 @@ export default {
                 this.$store.dispatch('update_trip', {title})
             }
         },
-        ...mapState({
-            destinations: state => state.trip.destinations
-        })
+        destinations: {
+            get() {
+                return this.$store.state.trip.destinations
+            },
+            set(newList) {
+                this.$store.dispatch('order_destinations', {destinations: newList})
+            }
+        }
     },
     methods: {
         back() {
