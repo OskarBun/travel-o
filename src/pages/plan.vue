@@ -24,16 +24,25 @@
 </template>
 
 <script>
+// JS
+// –– Vuex Helpers
+import { mapState } from 'vuex'
+
+// –– Dependencies
+import event_bus from '../event.js';
+
+// –– Panels
 import MapPanel from '../panels/map.vue';
 import DestinationSearchPanel from '../panels/destination_search.vue';
 import UserSearchPanel from '../panels/user_search.vue';
-import event_bus from '../event.js';
 
 
+
+// resize sent to event bus for google maps
 function smooth_resize(){
     setTimeout(() => {
         event_bus.$emit('map/resize')
-    }, 500);
+    }, 500)
 }
 
 export default {
@@ -48,6 +57,11 @@ export default {
             show_right: true
         }
     },
+    computed: {
+        ...mapState({
+            user_id: state => state.user.id
+        })
+    },
     methods: {
         toggle_left() {
             this.show_left = !this.show_left
@@ -57,6 +71,12 @@ export default {
             this.show_right = !this.show_right
             smooth_resize()
         },
+    },
+    created() {
+        // redirect to sign in page
+        if(!this.user_id) {
+            this.$router.push({name:'map'})
+        }
     }
 }
 </script>

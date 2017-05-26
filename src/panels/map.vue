@@ -2,7 +2,7 @@
     <div class="MapPanel">
         <gmap-map
         :center="center"
-        @center_changed="updateCenter"
+        @center_changed="update_center"
         :zoom="10"
         class="gmap"
         ref="map"
@@ -76,7 +76,7 @@ export default {
         })
     },
     methods: {
-        updateCenter(center) {
+        update_center(center) {
             this.center = {
                 lat: center.lat(),
                 lng: center.lng()

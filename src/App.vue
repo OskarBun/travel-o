@@ -25,12 +25,6 @@ export default {
     name: 'app',
     components: {
         'menu-panel': MenuPanel
-    },
-    data() {
-        return {
-        }
-    },
-    mounted() {
     }
 }
 
