@@ -60,7 +60,7 @@ export default {
                     }
                 } else {
                     if(!sub_id){
-                        store.commit("set_"+sub_topic, resp.result)
+                        store.commit("set_destinations", resp.result)
                     } else {
                         store.commit("push_"+sub_topic, resp.result);
                     }
