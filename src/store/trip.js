@@ -56,7 +56,12 @@ const TripModule = {
         },
         set_trip_user(state, user) {
             const i = state.users.findIndex(u=>u.id===user.id);
-            state.users[i] = user;
+            state.users = state.users.map(u=>{
+                if(u.id === user.id){
+                    return user
+                }
+                return u
+            });
             state.destinations = state.destinations.map(d=>{
                 if(d.created_by === user.id){
                     d.user = user;
