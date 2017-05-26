@@ -40,7 +40,7 @@ app.ws.use(async ctx => {
     }
 
     const cookie = ctx.cookies.get('travelo.cookie');
-    if(cookie) welcome.user = ctx.websocket.user = await ctx.rpc._auth({cookie});
+    if(cookie) welcome.user = ctx.websocket.user = await ctx.rpc._auth({cookie}, ctx);
 
     ctx.websocket.send(JSON.stringify(welcome))
 
@@ -56,6 +56,7 @@ app.ws.use(async ctx => {
 
         //Tell everyone about it
         resp.id = null;
+        resp.topic = topic;
         ctx.broadcast.emit(topic, JSON.stringify(resp))
     });
 

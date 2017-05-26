@@ -2,6 +2,12 @@
 // –– Websocket
 import ws from '../ws.js'
 
+function mapUsers(trip){
+    return trip.destinations.map((d)=>{
+        d.user = trip.people.find(u=>d.created_by===u.id)
+        return d
+    })
+}
 
 const SearchModule = {
     state: {
@@ -24,20 +30,41 @@ const TripModule = {
         id: null,
         title: null,
         access: null,
-        destinations: []
+        destinations: [],
+        users: []
     },
     mutations: {
         set_trip(state, trip) {
             state.id = trip.id
             state.title = trip.title
             state.access = trip.access
-            state.destinations = trip.destinations || []
+            state.users = trip.people
+            state.destinations = mapUsers(trip)
         },
         reset_trip(state) {
             state.id = null,
             state.title = null,
             state.access = null,
             state.destinations = []
+        },
+        set_trip_user(state, user) {
+            const i = state.users.findIndex(u=>u.id===user.id);
+            state.users[i] = user;
+            state.destinations = state.destinations.map(d=>{
+                if(d.created_by === user.id){
+                    d.user = user;
+                }
+                return d
+            })
+        },
+        push_destination(state, destination){
+            destination.user = state.users.find(user=>destination.created_by===user.id)
+            const i = state.destinations.findIndex((d=>d.id===destination.id))
+            if(i != -1){
+                state.destinations[i] = destination
+            } else {
+                state.destinations.push(destination)
+            }
         }
     },
     actions: {
@@ -64,8 +91,7 @@ const TripModule = {
             if(!state.id) return;
             params.trip_id = state.id;
             return ws.rpc('addDestination', params).then((destination)=>{
-                destination.user = rootState.user
-                state.destinations.push(destination)
+                commit('push_destination', destination)
                 return destination
             })
         }

@@ -24,6 +24,8 @@ import { mapState } from 'vuex'
 // –– Components
 import Icon from '../components/icon.vue'
 
+import ws from '../ws.js'
+
 
 export default {
     components: {
@@ -57,6 +59,12 @@ export default {
         else {
             this.back()
         }
+    },
+    destroyed() {
+        ws.rpc('deregister', {topic: [
+            'trip/'+this.id,
+            ...this.$store.state.trip.users.filter(user=>user.id!=this.$store.state.user.id).map(user=>'user/'+user.id)
+        ]})
     }
 }
 </script>

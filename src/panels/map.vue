@@ -84,7 +84,8 @@ export default {
         }
     },
     watch: {
-        markers(newList){
+        markers(newList, oldList){
+            if(newList.length === oldList.length) return;
             if(google && newList.length > 0){
                 let rb = null
                 newList.forEach(d=>{
@@ -103,9 +104,15 @@ export default {
         event_bus.$on('map/resize', ()=>{
             Vue.$gmapDefaultResizeBus.$emit('resize')
         })
-        event_bus.$on('map/rebounds', ({bounds})=>{
+        event_bus.$on('map/bounds', ({bounds})=>{
             map.fitBounds(bounds)
         })
+        event_bus.$on('map/center', function({center}){
+            this.center = center
+        }.bind(this))
+    },
+    destroyed() {
+        console.log("foo");
     }
 }
 </script>

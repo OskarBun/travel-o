@@ -7,7 +7,7 @@
         <ul class="body">
             <li class="destination" v-for="destination in results" @click="view_destination(destination)">
                 <div class="name">{{destination.formatted_address}}</div>
-                <div class="add" @click="add_to_trip(destination)">
+                <div class="add" @click="add_to_trip(destination)" v-if="trip">
                     <span class="lnr lnr-plus-circle"></span>
                 </div>
             </li>
@@ -30,22 +30,26 @@ export default {
                 return this.$store.state.destination.search.query
             },
             set(query) {
+                if(query)
                 this.$store.dispatch('search_destination', {query})
             }
         },
         ...mapState({
-            results: state => state.destination.search.results
+            results: state => state.destination.search.results,
+            trip: state => state.trip.id
         })
     },
     methods: {
         view_destination(d){
             if(d.location_bounds)
-            event_bus.$emit('map/rebounds', {bounds: {
+            event_bus.$emit('map/bounds', {bounds: {
                 east: d.location_bounds.northeast.lng,
                 north: d.location_bounds.northeast.lat,
                 south: d.location_bounds.southwest.lat,
                 west: d.location_bounds.southwest.lng
             }})
+            else
+            event_bus.$emit('map/center', {center: d.location})
         },
         add_to_trip(d){
             this.$store.dispatch('add_destination', {
