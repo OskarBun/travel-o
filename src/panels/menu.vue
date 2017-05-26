@@ -7,7 +7,7 @@
             </router-link>
         </div>
         <div class="menu-segment menu-centre">
-            <div class="trip-users" v-if="trip_users">
+            <div class="trip-users" v-if="trip_users.length > 0">
                 <div class="user" v-for="user in trip_users" :key="user.id">
                     <div class="user-spacer">
                         <user-bubble class="user-icon" :image="user.avatar_url" :color="user.color"></user-bubble>
@@ -44,7 +44,7 @@
 import { mapState } from 'vuex'
 
 // –– Dependencies
-import event_bus from '../event.js';
+import event_bus from '../event.js'
 
 // –– Components
 import Icon from '../components/icon.vue'

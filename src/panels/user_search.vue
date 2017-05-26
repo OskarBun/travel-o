@@ -1,14 +1,31 @@
 <template>
     <div class="UserSearchPanel">
-        <input v-model="search">
-        <ul>
-            <li v-for="user in results" @click="add_to_trip(user)">{{user.username}}</li>
+        <div class="header">
+            <input class="search-text" placeholder="Invite people.." type="text" ref="search" v-model.lazy="search"/>
+            <span class="lnr lnr-magnifier" @click="$refs.search.focus()"></span>
+        </div>
+        <ul class="body">
+            <li class="user" v-for="user in results">
+                <div class="name">{{user.username}}</div>
+                <div class="add" @click="add_to_trip(user)" v-if="user">
+                    <span class="lnr lnr-plus-circle"></span>
+                </div>
+            </li>
         </ul>
+        <div class="footer map-link">
+            <div class="back" @click="back">Back</div>
+        </div>
     </div>
 </template>
 <script>
-// load vuex store
+// JS Imports
+// -- Vuex Helpers
 import { mapState } from 'vuex'
+
+// –– Dependencies
+import event_bus from '../event.js';
+
+
 // component definition
 export default {
     computed: {
@@ -26,8 +43,13 @@ export default {
     },
     methods: {
         add_to_trip(user){
-            if(this.$store.state.user.id != user.id)
+            if(this.$store.state.user.id != user.id) {
                 this.$store.dispatch('add_user', {user_id: user.id})
+                event_bus.$emit('show_add_user')
+            }
+        },
+        back() {
+            event_bus.$emit('show_add_destination')
         }
     }
 }
@@ -85,7 +107,7 @@ export default {
 .body {
     width: 100%;
     margin: 0;
-    height: calc(100% - 60px);
+    height: calc(100% - 60px*2);
     padding: 10px 0px;
     box-sizing: border-box;
     overflow: auto;
@@ -95,7 +117,7 @@ export default {
 
 .UserSearchPanel
 .body
-.destination {
+.user {
     display: flex;
     width: 100%;
     padding: 10px 15px;
@@ -111,24 +133,24 @@ export default {
 
 .UserSearchPanel
 .body
-.destination:first-child {
+.user:first-child {
     border-top: 1px solid #F1F1F1;
 }
 
 .UserSearchPanel
 .body
-.destination:hover {
+.user:hover {
     background-color: #E8F8FB;
 }
 
 .UserSearchPanel
-.body .destination
+.body .user
 .name {
     flex-grow: 1;
 }
 
 .UserSearchPanel
-.body .destination
+.body .user
 .add {
     display: block;
     width: 50px;
@@ -137,10 +159,33 @@ export default {
 }
 
 .UserSearchPanel
-.body .destination
+.body .user
 .add:hover {
     color: #F9D068;
     font-weight: bold;
     cursor: pointer;
+}
+
+.UserSearchPanel
+.footer .back {
+    text-align: center;
+    width: 100%;
+    border: 2px solid #69AEBB;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.UserSearchPanel
+.footer .back:hover {
+    background-color: #80CAD8;
+    color: #FFF;
+}
+
+.UserSearchPanel .footer .back[disabled],
+.UserSearchPanel .footer .back:hover[disabled] {
+    background-color: #FFF;
+    border-color: #CCC;
+    color: #CCC;
+    cursor: not-allowed;
 }
 </style>
