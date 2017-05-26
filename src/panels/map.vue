@@ -24,28 +24,35 @@
 </template>
 
 <script>
-/////////////////////////////////////////
-// New in 0.4.0
-import * as VueGoogleMaps from 'vue2-google-maps';
-import Vue from 'vue';
+// JS Imports
+// –– Vue / Vuex
+import Vue from 'vue'
 import {mapState} from 'vuex'
+
+// –– Dependencies
+import * as VueGoogleMaps from 'vue2-google-maps'
 import event_bus from '../event.js'
-import styles from '../assets/google_maps_theme.json';
+import styles from '../assets/google_maps_theme.json'
+
+// –– Assets
 import flag from '!raw-loader!../assets/markers/centre/map_marker_small.svg'
 
+
+//  colorise flag
 function colored_icon(color){
-    return "data:image/svg+xml," + encodeURIComponent(flag.split("#fff").join(color));
+    return "data:image/svg+xml," + encodeURIComponent(flag.split("#fff").join(color))
 }
 
+// Load google maps into Vue
 Vue.use(VueGoogleMaps, {
     load: {
         key: 'AIzaSyCrVVmnCNhwjYFiH5IbxOAsZMu1aNzp0ms'
     }
 });
 
-
+// Google Maps loaded callback
 VueGoogleMaps.loaded.then(()=>{
-
+    //
 })
 
 export default {
@@ -90,9 +97,9 @@ export default {
                 let rb = null
                 newList.forEach(d=>{
                     if(rb===null){
-                        rb = new google.maps.LatLngBounds(d.position, d.position);
+                        rb = new google.maps.LatLngBounds(d.position, d.position)
                     } else {
-                        rb.extend(d.position);
+                        rb.extend(d.position)
                     }
                 })
                 this.$refs.map.fitBounds(rb)
@@ -112,7 +119,7 @@ export default {
         }.bind(this))
     },
     destroyed() {
-        this.$store.commit("reset_trip");
+        this.$store.commit("reset_trip")
     }
 }
 </script>

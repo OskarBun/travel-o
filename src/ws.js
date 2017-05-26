@@ -52,7 +52,6 @@ export default {
                       id    = topics[1],
                       sub_topic = topics[2],
                       sub_id    = topics[3];
-                console.log(topics);
                 if(store.state[topic] && sub_topic===undefined){
                     if(store.state[topic].id === parseInt(id)){
                         store.commit("set_"+topic, resp.result);
