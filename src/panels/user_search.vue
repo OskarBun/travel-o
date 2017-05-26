@@ -1,7 +1,7 @@
 <template>
     <div class="UserSearchPanel">
         <div class="header">
-            <input class="search-text" placeholder="Invite people.." type="text" ref="search" v-model.lazy="search"/>
+            <input class="search-text" placeholder="Invite people.." type="text" ref="search" v-model="search"/>
             <span class="lnr lnr-magnifier" @click="$refs.search.focus()"></span>
         </div>
         <ul class="body">
@@ -45,7 +45,6 @@ export default {
         add_to_trip(user){
             if(this.$store.state.user.id != user.id) {
                 this.$store.dispatch('add_user', {user_id: user.id})
-                event_bus.$emit('show_add_user')
             }
         },
         back() {
