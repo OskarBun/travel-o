@@ -1,5 +1,5 @@
 <template>
-    <div class="MapPage">
+    <div class="PlanPage">
         <div class="panel left-panel" :class="{closed:!show_left}">
             <div class="close close-left" @click="toggle_left">
                 <div class="arrow arrow-right">«</div>
@@ -62,7 +62,7 @@ export default {
 </script>
 
 <style>
-    .MapPage {
+    .PlanPage {
         display: flex;
         width: 100%;
         height: 100%;
@@ -71,7 +71,7 @@ export default {
         border-top: 3px solid #F9D068;
     }
 
-    .MapPage
+    .PlanPage
     .panel {
         position: relative;
         max-width: 100%;
@@ -80,20 +80,20 @@ export default {
         box-sizing: border-box;
         transition: all .5s;
     }
-    .MapPage .panel.centre-panel {
+    .PlanPage .panel.centre-panel {
         background: #69AEBB;
         flex-grow: 1;
     }
-    .MapPage .panel.left-panel { border-right: 3px solid #F9D068; }
-    .MapPage .panel.right-panel { border-left: 3px solid #F9D068; }
+    .PlanPage .panel.left-panel { border-right: 3px solid #F9D068; }
+    .PlanPage .panel.right-panel { border-left: 3px solid #F9D068; }
 
-    .MapPage
+    .PlanPage
     .panel.closed {
         width: 0px;
         min-width: 0px;
     }
 
-    .MapPage
+    .PlanPage
     .panel .close {
         position: absolute;
         top: calc(50% - 50px/2);
@@ -116,20 +116,20 @@ export default {
     }
 
     /* show hide on hover */
-    .MapPage .panel .close.close-right { left: 0 }
-    .MapPage .panel:hover .close.close-right { left: calc(-50px/2) }
-    .MapPage .panel .close.close-left { right: 0 }
-    .MapPage .panel:hover .close.close-left { right: calc(-50px/2)}
+    .PlanPage .panel .close.close-right { left: 0 }
+    .PlanPage .panel:hover .close.close-right { left: calc(-50px/2) }
+    .PlanPage .panel .close.close-left { right: 0 }
+    .PlanPage .panel:hover .close.close-left { right: calc(-50px/2)}
 
 
-    .MapPage
+    .PlanPage
     .panel .close .arrow {
         width: 100%;
     }
-    .MapPage .panel .close .arrow.arrow-right { padding-left: 20px; }
-    .MapPage .panel .close .arrow.arrow-left { padding-right: 20px; }
+    .PlanPage .panel .close .arrow.arrow-right { padding-left: 20px; }
+    .PlanPage .panel .close .arrow.arrow-left { padding-right: 20px; }
 
-    .MapPage
+    .PlanPage
     .panel .panel-content {
         position: absolute;
         top: 0; bottom: 0;
@@ -140,7 +140,7 @@ export default {
         overflow: hidden;
     }
 
-    .MapPage
+    .PlanPage
     .panel .panel-content
     .view {
         min-width: 350px;

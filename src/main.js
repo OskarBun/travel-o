@@ -3,15 +3,15 @@
 import Vue from 'vue'
 // –– Vue Router
 import VueRouter from 'vue-router'
-// -- Vuex Store
-import store from './store/store';
+// –– Vuex Store
+import store from './store/store'
 
 // –– Root Vue Template
 import App from './app.vue'
 
 // –– Pages
 import HomePage from './pages/home.vue'
-import MapPage from './pages/map.vue'
+import PlanPage from './pages/plan.vue'
 import ProfilePage from './pages/profile.vue'
 import ReportPage from './pages/report.vue'
 
@@ -39,7 +39,7 @@ function begin() {
             },
             {
                 path: '/map',
-                component: MapPage,
+                component: PlanPage,
                 props: false,
                 children: [
                     {
