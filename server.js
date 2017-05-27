@@ -45,6 +45,8 @@ app.ws.use(async ctx => {
     ctx.websocket.send(JSON.stringify(welcome))
 
     ctx.websocket.on('message', async message => {
+        if(message === 'ping') ctx.websocket.send("pong")
+        else {
         const rpc = JSON.parse(message)
         console.log("Rpc call: "+ rpc.method);
         [result,topic] = await ctx.rpc[rpc.method](rpc.params, ctx)
@@ -58,7 +60,7 @@ app.ws.use(async ctx => {
         resp.id = null;
         resp.topic = topic;
         ctx.broadcast.emit(topic, JSON.stringify(resp))
-    });
+    }});
 
     ctx.websocket.on('close', () => {
         ctx.broadcast.deregister(ctx.websocket);

@@ -38,6 +38,9 @@ ws.onopen = () => {
     for(send in rpc.pending){
         send();
     }
+    setInterval(() => {
+        if(ws.readyState == 1) ws.send("ping")
+    }, 30000);
 }
 
 export default {
@@ -45,6 +48,7 @@ export default {
     vuex: store => {
         store.$rpc = rpc;
         ws.onmessage = (event) => {
+            if(event.data === 'pong') return;
             const resp = JSON.parse(event.data);
             if(resp.id === null){
                 const topics = resp.topic.split('/'),
