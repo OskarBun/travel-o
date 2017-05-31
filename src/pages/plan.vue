@@ -11,7 +11,7 @@
         <div class="panel centre-panel">
             <map-panel></map-panel>
         </div>
-        <div class="panel right-panel"  :class="{closed:!show_right}">
+        <div class="panel right-panel" :class="{closed:!show_right}">
             <div class="close close-right" @click="toggle_right">
                 <div class="arrow arrow-left">»</div>
             </div>
